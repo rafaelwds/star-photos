@@ -6,7 +6,7 @@ import { Creators as UserActions } from "../store/ducks/users";
 
 function UserList() {
   const dispatch = useDispatch();
-  const { data, modalStatus } = useSelector((state) => {
+  const  data  = useSelector((state) => {
     const users = state.users.data.map((user) => {
       const images = state.images.data.filter(
         (image) => Number(image.user_id) === Number(user.id)
@@ -17,6 +17,8 @@ function UserList() {
 
     return users;
   });
+  const { modalStatus } = useSelector((state) => state.users);
+  console.log(data)
 
   function setModal(status) {
     dispatch(UserActions.setModalStatus(status));
@@ -42,8 +44,8 @@ function UserList() {
               <td>
                 <Button>Ver Imagens</Button>
                 <ModalUserImagen
-                  show={modalStatus}
-                  handleClose={() => setModal(false)}
+                   showMU={modalStatus}
+                   handleClose={() => setModal(false)}
                 />
               </td>
               {/* <td>{JSON.stringify(item.images)}</td> */}
